@@ -1,0 +1,12 @@
+ [vite] connecting...
+useNavigate() may be used only in the context of a  component.
+at invariant (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=700dd9a7:527:11)
+at useNavigateUnstable (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=700dd9a7:5286:3)
+at useNavigate (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=700dd9a7:5283:46)
+at Dashboard (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/src/pages/dashboard.tsx:33:20)
+at renderWithHooks (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:11548:26)
+at mountIndeterminateComponent (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:14926:21)
+at beginWork (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:15914:22)
+at HTMLUnknownElement.callCallback2 (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:3674:22)
+at Object.invokeGuardedCallbackDev (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:3699:24)
+at invokeGuardedCallback (https://8545cfce-880d-422d-8820-babc4181b751-00-14lfg37ckepk0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=700dd9a7:3733:39)

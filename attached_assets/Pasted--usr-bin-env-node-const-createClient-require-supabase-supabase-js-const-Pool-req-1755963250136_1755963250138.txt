@@ -1,0 +1,187 @@
+#!/usr/bin/env node
+
+const { createClient } = require('@supabase/supabase-js');
+const { Pool } = require('pg');
+
+// Cores para output
+const colors = {
+  green: '\x1b[32m',
+  red: '\x1b[31m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  reset: '\x1b[0m',
+  bold: '\x1b[1m'
+};
+
+function log(color, symbol, message) {
+  console.log(`${color}${symbol}${colors.reset} ${message}`);
+}
+
+async function checkSupabaseConnections() {
+  console.log(`${colors.bold}🔍 VERIFICANDO CONEXÕES SUPABASE${colors.reset}\n`);
+
+  // 1. Verificar variáveis de ambiente
+  console.log(`${colors.bold}📋 1. VARIÁVEIS DE AMBIENTE:${colors.reset}`);
+  
+  const requiredVars = [
+    'SUPABASE_URL',
+    'SUPABASE_ANON_KEY', 
+    'SUPABASE_SERVICE_ROLE_KEY',
+    'DATABASE_URL',
+    'VITE_SUPABASE_URL',
+    'VITE_SUPABASE_ANON_KEY'
+  ];
+
+  const envStatus = {};
+  requiredVars.forEach(varName => {
+    const value = process.env[varName];
+    envStatus[varName] = !!value;
+    
+    if (value) {
+      if (varName.includes('URL')) {
+        log(colors.green, '✅', `${varName}: ${value}`);
+      } else {
+        log(colors.green, '✅', `${varName}: ${value.substring(0, 20)}...`);
+      }
+    } else {
+      log(colors.red, '❌', `${varName}: NÃO CONFIGURADA`);
+    }
+  });
+
+  console.log('');
+
+  // 2. Testar cliente Supabase
+  console.log(`${colors.bold}🔗 2. TESTE DO CLIENTE SUPABASE:${colors.reset}`);
+  
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    log(colors.red, '❌', 'Credenciais do Supabase não encontradas');
+    return;
+  }
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    // Teste básico de conexão
+    const startTime = Date.now();
+    const { data, error } = await supabase.from('users').select('count').limit(1);
+    const responseTime = Date.now() - startTime;
+
+    if (error) {
+      log(colors.red, '❌', `Erro na conexão: ${error.message}`);
+    } else {
+      log(colors.green, '✅', `Conexão bem-sucedida em ${responseTime}ms`);
+    }
+  } catch (error) {
+    log(colors.red, '❌', `Erro do cliente: ${error.message}`);
+  }
+
+  console.log('');
+
+  // 3. Testar conexão com banco PostgreSQL
+  console.log(`${colors.bold}🗄️  3. TESTE DO BANCO POSTGRESQL:${colors.reset}`);
+  
+  const databaseUrl = process.env.DATABASE_URL;
+  
+  if (!databaseUrl) {
+    log(colors.red, '❌', 'DATABASE_URL não configurada');
+    return;
+  }
+
+  log(colors.blue, 'ℹ️', `URL: ${databaseUrl.replace(/:[^@]*@/, ':***@')}`);
+
+  try {
+    const pool = new Pool({
+      connectionString: databaseUrl,
+      ssl: databaseUrl.includes('supabase.co') || databaseUrl.includes('neon.tech') ? { 
+        rejectUnauthorized: false 
+      } : false,
+      max: 5,
+      connectionTimeoutMillis: 10000,
+    });
+
+    const startTime = Date.now();
+    const result = await pool.query('SELECT version(), current_database()');
+    const responseTime = Date.now() - startTime;
+    
+    log(colors.green, '✅', `Conexão PostgreSQL bem-sucedida em ${responseTime}ms`);
+    log(colors.blue, 'ℹ️', `Versão: ${result.rows[0].version.split(' ').slice(0, 2).join(' ')}`);
+    log(colors.blue, 'ℹ️', `Database: ${result.rows[0].current_database}`);
+
+    await pool.end();
+  } catch (error) {
+    log(colors.red, '❌', `Erro PostgreSQL: ${error.message}`);
+  }
+
+  console.log('');
+
+  // 4. Verificar tabelas
+  console.log(`${colors.bold}📊 4. VERIFICANDO TABELAS:${colors.reset}`);
+  
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const tables = ['users', 'services', 'providers', 'requesters'];
+    
+    for (const table of tables) {
+      try {
+        const { count, error } = await supabase
+          .from(table)
+          .select('*', { count: 'exact', head: true });
+          
+        if (error) {
+          log(colors.red, '❌', `Tabela '${table}': ${error.message}`);
+        } else {
+          log(colors.green, '✅', `Tabela '${table}': ${count || 0} registros`);
+        }
+      } catch (err) {
+        log(colors.red, '❌', `Tabela '${table}': ${err.message}`);
+      }
+    }
+  } catch (error) {
+    log(colors.red, '❌', `Erro ao verificar tabelas: ${error.message}`);
+  }
+
+  console.log('');
+
+  // 5. Resumo e recomendações
+  console.log(`${colors.bold}📋 5. RESUMO:${colors.reset}`);
+  
+  const missingVars = requiredVars.filter(varName => !process.env[varName]);
+  
+  if (missingVars.length > 0) {
+    log(colors.yellow, '⚠️', `Variáveis faltando: ${missingVars.join(', ')}`);
+    console.log('\n' + colors.yellow + 'RECOMENDAÇÕES:' + colors.reset);
+    console.log('1. Configure as variáveis em Tools → Secrets');
+    console.log('2. Use os valores corretos com a senha Brandness*2025');
+    console.log('3. Reinicie a aplicação após configurar');
+  } else {
+    log(colors.green, '✅', 'Todas as variáveis estão configuradas');
+  }
+
+  // 6. Mostrar valores corretos para configuração
+  console.log('\n' + colors.bold + '🔧 VALORES CORRETOS PARA SECRETS:' + colors.reset);
+  console.log('\n' + colors.blue + 'DATABASE_URL:' + colors.reset);
+  console.log('postgresql://postgres.wyxnyliiuxdhbbctxzlk:Brandness*2025@aws-1-sa-east-1.pooler.supabase.com:6543/postgres');
+  
+  console.log('\n' + colors.blue + 'SUPABASE_URL:' + colors.reset);
+  console.log('https://wyxnyliiuxdhbbctxzlk.supabase.co');
+  
+  console.log('\n' + colors.blue + 'SUPABASE_ANON_KEY:' + colors.reset);
+  console.log('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eG55bGlpdXhkaGJiY3R4emxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1NzI0ODMsImV4cCI6MjA3MDE0ODQ4M30.-2O19Gv-u2tQMlolKYjjy3p37hfvCWjT99rsRdrBP5k');
+  
+  console.log('\n' + colors.blue + 'VITE_SUPABASE_URL:' + colors.reset);
+  console.log('https://wyxnyliiuxdhbbctxzlk.supabase.co');
+  
+  console.log('\n' + colors.blue + 'VITE_SUPABASE_ANON_KEY:' + colors.reset);
+  console.log('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eG55bGlpdXhkaGJiY3R4emxrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1NzI0ODMsImV4cCI6MjA3MDE0ODQ4M30.-2O19Gv-u2tQMlolKYjjy3p37hfvCWjT99rsRdrBP5k');
+  
+  console.log('\n' + colors.green + '💡 COPIE E COLE cada valor em Tools → Secrets no Replit!' + colors.reset);
+}
+
+// Executar verificação
+checkSupabaseConnections().catch(error => {
+  console.error(`${colors.red}💥 Erro fatal:${colors.reset}`, error.message);
+  process.exit(1);
+});

@@ -1,0 +1,56 @@
+Estou migrando meu banco de dados para o Supabase, utilizando o Transaction Pooler (porta 6543) para compatibilidade com IPv4 no Replit. Preciso que você atualize completamente o app para funcionar com esse novo banco.
+________________________________________
+🧱 1. ATUALIZAR CONEXÃO DO DRIZZLE ORM
+➤ Substituir a conexão local pelo Supabase:
+•	Atualize a instância do pg.Pool para usar a variável DATABASE_URL do .env.
+•	Certifique-se de que todos os lugares que usam o banco (Drizzle) estejam apontando para essa nova instância.
+ts
+CopiarEditar
+// Exemplo:
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import 'dotenv/config';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const db = drizzle(pool);
+________________________________________
+🧪 2. VARIÁVEL DE AMBIENTE NO .ENV
+Garanta que o arquivo .env contenha a seguinte variável:
+env
+CopiarEditar
+DATABASE_URL=postgresql://postgres.wxyz:Dev@1206@aws-xxx.supabase.co:6543/postgres
+⚠️ Não coloque colchetes — use a senha real.
+________________________________________
+🔁 3. APLICAR MIGRAÇÕES NO NOVO BANCO
+➤ Execute:
+bash
+CopiarEditar
+npx drizzle-kit push
+•	Isso cria as tabelas no banco do Supabase.
+•	Se der erro, verifique se a conexão está correta.
+________________________________________
+🔐 4. AUTENTICAÇÃO DE USUÁRIOS
+O app atual usava autenticação local. Desejo que:
+➤ Adapte a lógica para:
+•	Usar Supabase apenas como banco de dados
+•	Manter login local com email e senha funcionando (via Drizzle + bcrypt)
+•	OU integrar login com Google OAuth (se possível) com Supabase Auth
+Se for usado Supabase Auth, armazenar nome, email e role manualmente na tabela users após o login com Google.
+________________________________________
+📁 5. SUGESTÃO DE ARQUIVOS OBSOLETOS PARA LIMPAR
+Se o login via Google substituir a lógica local, sugiro excluir:
+•	Helpers de bcrypt, jsonwebtoken
+•	Middlewares de autenticação local, se não forem mais usados
+•	Rotas antigas de login/cadastro (/auth/login, /auth/register), se migrar tudo para Supabase Auth
+Peça confirmação antes de excluir.
+________________________________________
+✅ OBJETIVO FINAL
+•	O banco de dados deve funcionar perfeitamente com Supabase (porta 6543)
+•	O Drizzle deve estar totalmente conectado ao Supabase
+•	Login e criação de usuários devem persistir dados no Supabase
+•	A criação de serviços (title, serviceType) deve funcionar sem erros
+•	Dados devem ser visíveis e gerenciáveis pelo painel web do Supabase
+•	O .env deve estar configurado corretamente
+________________________________________
+Se precisar, posso informar a senha do banco para colocar diretamente no .env.
+Me avise se for necessário criar os schemas ou se o assistente pode inferir com base nos arquivos existentes.

@@ -1,0 +1,110 @@
+Solicitação Técnica – Restauração da Tela “Gerenciar Serviços” no Dropdown de Administrador
+1. Contexto
+Durante uma modificação ou atualização recente, o link “Gerenciar Serviços” foi removido do dropdown de administrador.
+Esse link levava a uma tela essencial onde o administrador visualizava e gerenciava todos os serviços cadastrados no sistema.
+O funcionamento original precisa ser restaurado exatamente como estava, sem impactos em outras áreas do sistema.
+
+2. Funcionalidade Original
+Listagem e Ordenação
+Exibir todos os serviços cadastrados, separados em:
+
+Pendentes
+
+Programados
+
+Concluídos
+
+Ordenar pendentes e programados primeiro, seguidos dos concluídos, todos organizados por data (mais recente primeiro).
+
+CRUD Completo para Administradores
+Criar novos serviços.
+
+Editar qualquer campo de serviços existentes.
+
+Modificar informações já registradas.
+
+Inserir dados adicionais.
+
+Excluir serviços.
+
+Gerenciar Fotos: adicionar, substituir ou excluir imagens associadas ao serviço.
+
+3. Campos Necessários para Edição
+Todos os campos existentes na criação original do serviço devem estar disponíveis para edição:
+
+ID do serviço
+
+Título
+
+Tipo de serviço
+
+Data de conclusão ou agendamento
+
+Valor (ou texto “incluído no plano mensal”)
+
+Descrição detalhada
+
+Status (pendente, programado, concluído)
+
+Fotos anexadas
+
+Campos adicionais existentes no schema original
+
+4. Estrutura de Banco de Dados (Modelo Padrão)
+Tabela: servicos
+
+Campo	Tipo	Descrição
+id	UUID / INT	Identificador único do serviço
+titulo	STRING	Nome do serviço
+tipo_servico	STRING	Categoria ou tipo
+data	DATE/TIME	Data de conclusão ou agendamento
+valor	DECIMAL	Preço ou informação “incluído no plano”
+descricao	TEXT	Detalhes do serviço
+status	ENUM	pendente / programado / concluído
+fotos	ARRAY/JSON	Lista de URLs de imagens
+criado_em	DATE/TIME	Data de criação do registro
+atualizado_em	DATE/TIME	Última atualização
+criado_por	USER_ID	ID do administrador que cadastrou
+
+5. Endpoints / Métodos a Restaurar
+GET /admin/servicos – Lista todos os serviços com filtros por status e ordenação por data.
+
+POST /admin/servicos – Cria novo serviço.
+
+PUT /admin/servicos/{id} – Atualiza serviço existente (todos os campos e fotos).
+
+DELETE /admin/servicos/{id} – Remove serviço.
+
+UPLOAD /admin/servicos/{id}/fotos – Adiciona ou substitui imagens.
+
+6. Fluxo Esperado
+Dropdown de Administrador → Item “Gerenciar Serviços” (link restaurado).
+
+Tela de Gerenciamento:
+
+Filtro por status.
+
+Ordenação automática: pendentes e programados primeiro.
+
+Listagem com paginação ou scroll infinito.
+
+Botões de ação: Editar, Excluir, Criar Novo.
+
+Modal ou Página de Edição:
+
+Exibir todos os campos listados no item 3.
+
+Possibilidade de inserir, modificar ou excluir fotos.
+
+Confirmação para exclusões.
+
+Feedback visual para ações concluídas com sucesso ou erro.
+
+7. Requisito Final
+Restaurar exatamente como estava antes, garantindo que:
+
+Nenhum fluxo ou funcionalidade externa seja impactado.
+
+Toda a lógica CRUD seja preservada.
+
+A tela seja acessível apenas para administradores.

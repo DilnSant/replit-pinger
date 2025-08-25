@@ -1,0 +1,1 @@
+// This file is deprecated - using updated auth in routes.ts

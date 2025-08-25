@@ -1,0 +1,49 @@
+🎯 Desejo aplicar controle de acesso com base em tipo de usuário nas rotas do meu backend Express.
+
+Usuários podem ser do tipo:
+- `admin`: acesso total
+- `solicitante`: pode criar e visualizar, mas não editar nem deletar
+- `fornecedor`: pode visualizar e editar (mas não deletar ou criar)
+- `visualizador`: apenas pode ver
+
+Já tenho o middleware `checkRole` implementado no arquivo `middleware.ts`.
+
+Quero que você atualize as rotas nos arquivos abaixo, **inserindo `checkRole` corretamente** ao lado de `isAuthenticated` e `checkPermissions`, e **deixe claro para mim qual conteúdo vai em qual arquivo.**
+
+---
+
+### 🔧 Arquivo: `server/routes.ts`
+
+Atualize este arquivo com as rotas protegidas assim:
+
+```ts
+// Requesters (solicitantes)
+app.get('/api/requesters', isAuthenticated, checkPermissions, checkRole(["admin", "visualizador", "solicitante"]), async (req, res) => { ... });
+
+app.post('/api/requesters', isAuthenticated, checkPermissions, checkRole(["admin", "solicitante"]), async (req, res) => { ... });
+
+app.put('/api/requesters/:id', isAuthenticated, checkPermissions, checkRole(["admin", "solicitante"]), async (req, res) => { ... });
+
+app.delete('/api/requesters/:id', isAuthenticated, checkPermissions, requireAdmin, async (req, res) => { ... }); // Somente admin
+
+
+// Providers (fornecedores)
+app.get('/api/providers', isAuthenticated, checkPermissions, checkRole(["admin", "visualizador", "fornecedor"]), async (req, res) => { ... });
+
+app.post('/api/providers', isAuthenticated, checkPermissions, requireAdmin, async (req, res) => { ... }); // apenas admin
+
+app.put('/api/providers/:id', isAuthenticated, checkPermissions, checkRole(["admin", "fornecedor"]), async (req, res) => { ... });
+
+app.delete('/api/providers/:id', isAuthenticated, checkPermissions, requireAdmin, async (req, res) => { ... }); // apenas admin
+
+
+// Services (serviços)
+app.get('/api/services', isAuthenticated, checkPermissions, checkRole(["admin", "visualizador", "solicitante", "fornecedor"]), async (req, res) => { ... });
+
+app.get('/api/services/stats', isAuthenticated, checkPermissions, checkRole(["admin", "solicitante", "visualizador"]), async (req, res) => { ... });
+
+app.post('/api/services', isAuthenticated, checkPermissions, checkMonthlyCredits, checkRole(["admin", "solicitante"]), upload.array('images', 10), async (req, res) => { ... });
+
+app.put('/api/services/:id', isAuthenticated, checkPermissions, requireAdmin, upload.array('images', 10), async (req, res) => { ... }); // apenas admin
+
+app.delete('/api/services/:id', isAuthenticated, checkPermissions, requireAdmin, async (req, res) => { ... }); // apenas admin

@@ -1,0 +1,55 @@
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+Cannot read properties of null (reading 'useState')
+The above error occurred in the <Header> component:
+
+    at Header (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/components/Header.tsx:17:34)
+    at div
+    at Dashboard (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/pages/dashboard.tsx:19:35)
+    at Route (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:206:16)
+    at Switch (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:262:17)
+    at QueryClientProvider (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d3c75dd9:2934:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+The above error occurred in the <StatsCards> component:
+
+    at StatsCards (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/components/StatsCards.tsx:7:3)
+    at div
+    at main
+    at div
+    at Dashboard (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/pages/dashboard.tsx:19:35)
+    at Route (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:206:16)
+    at Switch (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:262:17)
+    at QueryClientProvider (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d3c75dd9:2934:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+The above error occurred in the <Dialog> component:
+
+    at Dialog (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=e588887c:262:5)
+    at NewServiceModal (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/components/NewServiceModal.tsx:34:43)
+    at div
+    at Dashboard (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/pages/dashboard.tsx:19:35)
+    at Route (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:206:16)
+    at Switch (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d3c75dd9:262:17)
+    at QueryClientProvider (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d3c75dd9:2934:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+The above error occurred in the <ToastProvider> component:
+
+    at ToastProvider (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-toast.js?v=e588887c:57:5)
+    at Toaster (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/src/components/ui/toaster.tsx:12:22)
+    at QueryClientProvider (https://3254b3e7-215d-456f-9cf9-3406ccdd1ea7-00-19k4jsnyyouiq.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d3c75dd9:2934:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Cannot read properties of null (reading 'useState')

@@ -1,0 +1,35 @@
+Create a fullstack app from scratch using Modern Web App template with Node.js backend and React frontend. The app is a service manager that allows registering service requests from clients and assigning providers. Use a clean and professional design with background color #D0D6DD, dark blue text, and interface colors in dark gray, blue, and black tones.
+
+The dashboard should display the latest services with an image and the following info below it:
+Title: [service title]
+Date: [service date]
+Requester: [requester name]
+Provider: [provider name]
+Status: [Pending, Resolved, or Canceled]
+Value: R$ [amount] (mention if included in monthly package)
+
+Add a dropdown to filter by month (default is current month). Next to it, add a gear icon that opens a dropdown menu with:
+– Add New Requester
+– Add New Provider
+– List of all requesters
+– List of all providers
+Menu and dropdown backgrounds must be opaque (no transparency), and hovering any item must make its text bold.
+
+The “+ New Service” button should be 30% smaller and open a modal with the following fields:
+– Upload multiple images
+– Service title
+– Service types (checkbox): Maintenance, Repair, Installation, Assembly, Cleaning, Correction
+– Requester (dropdown)
+– Monthly Package (checkbox)
+– Credits used (input, enabled only if Monthly Package is checked, limit 4 per month per requester)
+– Status (radio buttons): Pending, Resolved, Canceled
+– Service value (R$, optional)
+– Description
+– Request date (calendar)
+– Completion date (calendar)
+
+Display all services grouped in three tabs: Pending, Resolved, and Canceled. Limit to 4 active services per requester per month.
+
+Allow uploading a custom logo and show it in the app header next to the title. Use Replit DB to store data. Ensure images persist across sessions. Include email notification on service completion only if the requester has a toggle “Receive Email Notification” set to true.
+
+Make sure the UI is attractive, modern, and functional on desktop and mobile. Avoid generic colors or styles. Do not use transparency in modals or menus.

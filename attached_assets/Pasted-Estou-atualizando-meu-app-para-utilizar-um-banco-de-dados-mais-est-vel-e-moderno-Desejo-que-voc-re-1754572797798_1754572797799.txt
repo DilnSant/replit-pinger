@@ -1,0 +1,62 @@
+Estou atualizando meu app para utilizar um banco de dados mais estável e moderno. Desejo que você realize as seguintes ações com base nas instruções abaixo.
+________________________________________
+🟢 1. CONECTAR O APP AO SUPABASE
+Objetivo: usar o Supabase como meu banco principal.
+➤ Ações esperadas:
+•	Substitua a conexão atual com o banco de dados local do Replit por uma conexão PostgreSQL com Supabase.
+•	A connection string deve vir da variável de ambiente DATABASE_URL, que irei adicionar ao meu .env.
+Exemplo:
+env
+CopiarEditar
+DATABASE_URL=postgres://usuario:senha@db.supabase.co:5432/nomedobanco
+________________________________________
+🧱 2. CONFIGURAR O DRIZZLE ORM PARA SUPABASE
+➤ Ajustes necessários:
+•	Atualize o arquivo drizzle.config.ts para utilizar a nova DATABASE_URL vinda do Supabase.
+•	Reconfigure o cliente do Drizzle (drizzle() + pg.Pool) para apontar corretamente para o Supabase.
+________________________________________
+🔐 3. REFATORAR AUTENTICAÇÃO PARA USAR O SUPABASE AUTH
+➤ Desejo que o sistema:
+•	Use login com Google (Gmail) via Supabase Auth.
+•	Permita cadastrar e logar usuários com:
+o	name
+o	email
+o	role
+o	(senha, se necessário)
+•	Após o login/cadastro, gerar token de sessão (JWT) e armazenar os dados no Supabase.
+➤ Integração:
+•	Substitua a autenticação local antiga por Supabase Auth.
+•	Caso o Supabase Auth seja usado apenas para Google e o app precise manter autenticação local (email/senha), armazene os dados no Supabase manualmente com Drizzle.
+________________________________________
+🧹 4. SUGESTÃO DE LIMPEZA DE CÓDIGO
+Se o app estava usando autenticação própria (com bcrypt, passport, etc), sugiro:
+➤ Arquivos e bibliotecas que podem ser removidos (caso não sejam mais usados):
+•	Middlewares ou helpers antigos de autenticação
+•	Rotas de login/cadastro antigas (com email/senha)
+•	Uso de bcrypt, jsonwebtoken, etc, se for substituído totalmente por Supabase Auth
+Peça confirmação antes de excluir, mas prepare a limpeza para simplificar o projeto.
+________________________________________
+📁 ESTRUTURA DO APP ATUAL:
+As pastas principais são:
+•	/client – frontend
+•	/server – rotas e lógica backend (Express)
+•	/shared – schemas Drizzle + validações Zod
+•	/migrations – migrations do Drizzle
+•	.env – conterá a DATABASE_URL
+________________________________________
+🧪 5. TESTES ESPERADOS:
+•	Teste login com Google e certifique-se de que o usuário é armazenado corretamente.
+•	Teste criação de serviço com title e serviceType funcionando corretamente.
+•	Teste permissões conforme o role do usuário.
+•	Todos os dados devem ser lidos/escritos no Supabase (não local).
+________________________________________
+✅ RESUMO DO OBJETIVO
+Ter um app funcional no Replit, com:
+•	Banco de dados no Supabase (PostgreSQL)
+•	Autenticação com Google
+•	Login e cadastro salvos corretamente no Supabase
+•	Controle de permissões por role
+•	Drizzle ORM apontando para o Supabase
+•	Sem dependência do banco local do Replit
+•	Código limpo e sem arquivos antigos de autenticação local (se não usados)
+

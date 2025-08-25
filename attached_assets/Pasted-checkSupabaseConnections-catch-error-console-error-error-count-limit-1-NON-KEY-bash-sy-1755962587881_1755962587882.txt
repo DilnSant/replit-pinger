@@ -1,0 +1,75 @@
+checkSupabaseConnections().catch(error => console.error(error));;count').limit(1);NON_KEY;
+bash: syntax error near unexpected token `('
+bash: syntax error near unexpected token `('
+bash: //: Is a directory
+bash: const: command not found
+bash: green:: command not found
+bash: red:: command not found
+bash: yellow:: command not found
+bash: blue:: command not found
+bash: reset:: command not found
+bash: bold:: command not found
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `{'
+bash: syntax error near unexpected token ``${color}${symbol}${colors.reset} ${message}`'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `('
+bash: syntax error near unexpected token ``${colors.bold}🔍 VERIFICANDO CONEXÕES SUPABASE${colors.reset}\n`'
+bash: //: Is a directory
+bash: syntax error near unexpected token ``${colors.bold}📋 1. VARIÁVEIS DE AMBIENTE:${colors.reset}`'
+bash: const: command not found
+bash: SUPABASE_URL,: command not found
+bash: SUPABASE_ANON_KEY,: command not found
+bash: SUPABASE_SERVICE_ROLE_KEY,: command not found
+bash: DATABASE_URL,: command not found
+bash: VITE_SUPABASE_URL,: command not found
+bash: VITE_SUPABASE_ANON_KEY: command not found
+bash: ]: command not found
+bash: const: command not found
+bash: syntax error near unexpected token `varName'
+bash: const: command not found
+    envStatus[varName] =     const value = process.env[varName];value;
+bash: envStatus[varName]: command not found
+bash: value: command not found
+bash: syntax error near unexpected token `{'
+bash: syntax error near unexpected token `'URL''
+bash: syntax error near unexpected token `colors.green,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `colors.green,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `colors.red,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `'''
+bash: //: Is a directory
+bash: syntax error near unexpected token ``${colors.bold}🔗 2. TESTE DO CLIENTE SUPABASE:${colors.reset}`'
+bash: const: command not found
+bash: process.env.VITE_SUPABASE_URL: command not found
+bash: const: command not found
+bash: process.env.VITE_SUPABASE_ANON_KEY: command not found
+bash: !supabaseUrl: event not found
+bash: syntax error near unexpected token `colors.red,'
+bash: return: can only `return' from a function or sourced script
+bash: syntax error near unexpected token `}'
+try: command not installed, but was located via Nix.
+package: try  0.2.0  Lets you run a command and inspect its effects before changing your live system
+Would you like to run try from Nix and add it to your project? [Yn]: y
+try  0.2.0  Lets you run a command and inspect its effects before changing your live system
+Adding try to .replit
+unshare: unshare failed: Operation not permitted
+bash: syntax error near unexpected token `('
+bash: //: Is a directory
+bash: syntax error near unexpected token `('
+bash: syntax error near unexpected token `{'
+bash: syntax error near unexpected token `colors.red,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `colors.green,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `colors.red,'
+bash: syntax error near unexpected token `}'
+bash: syntax error near unexpected token `'''
+bash: syntax error near unexpected token `}'
+bash: //: Is a directory
+bash: syntax error near unexpected token `.catch'

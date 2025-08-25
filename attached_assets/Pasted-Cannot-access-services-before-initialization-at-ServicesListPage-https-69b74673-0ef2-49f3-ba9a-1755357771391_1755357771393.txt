@@ -1,0 +1,43 @@
+Cannot access 'services' before initialization
+at ServicesListPage (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/src/pages/services-list.tsx:39:25)
+at renderWithHooks (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:11548:26)
+at mountIndeterminateComponent (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:14926:21)
+at beginWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:15914:22)
+at HTMLUnknownElement.callCallback2 (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3674:22)
+at Object.invokeGuardedCallbackDev (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3699:24)
+at invokeGuardedCallback (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3733:39)
+at beginWork$1 (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19765:15)
+at performUnitOfWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19201:20)
+at workLoopSync (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19137:13)
+Cannot access 'services' before initialization
+at ServicesListPage (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/src/pages/services-list.tsx:39:25)
+at renderWithHooks (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:11548:26)
+at mountIndeterminateComponent (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:14926:21)
+at beginWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:15914:22)
+at HTMLUnknownElement.callCallback2 (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3674:22)
+at Object.invokeGuardedCallbackDev (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3699:24)
+at invokeGuardedCallback (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:3733:39)
+at beginWork$1 (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19765:15)
+at performUnitOfWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19201:20)
+at workLoopSync (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19137:13)
+The above error occurred in the <ServicesListPage> component:
+
+    at ServicesListPage (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/src/pages/services-list.tsx:27:35)
+    at Route (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e588887c:206:16)
+    at Switch (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e588887c:262:17)
+    at QueryClientProvider (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=e588887c:2934:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Cannot access 'services' before initialization
+at ServicesListPage (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/src/pages/services-list.tsx:39:25)
+at renderWithHooks (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:11548:26)
+at mountIndeterminateComponent (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:14926:21)
+at beginWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:15914:22)
+at beginWork$1 (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19753:22)
+at performUnitOfWork (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19201:20)
+at workLoopSync (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19137:13)
+at renderRootSync (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:19116:15)
+at recoverFromConcurrentError (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=e588887c:18736:28)
+at performSyncWorkOnRoot (https://69b74673-0ef2-49f3-ba9a-bc22a1c316ad-00-w4i0twjv1w27.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/dep

@@ -1,0 +1,50 @@
+Olá! Preciso que você execute as tarefas abaixo exatamente nesta ordem, confirmando a conclusão de cada item antes de passar para o próximo.
+
+IMPORTANTE:
+
+Não altere nenhuma outra funcionalidade do backend ou frontend além do que está especificado.
+
+Antes de iniciar, crie um backup completo do código e do banco de dados para garantir possibilidade de reversão.
+
+Tarefa 1 – Novo Serviço
+
+Ao selecionar "Incluído no pacote mensal", iniciar automaticamente o campo "Créditos Utilizados" com valor 1.
+
+Ao selecionar "Cortesia":
+  - Não alterar ou incluir valor em "Créditos Utilizados".
+  - Desmarcar/ignorar "Incluído no pacote mensal".
+  - Ignorar o campo Valor do Serviço (R$).
+
+Corrigir bug da data (exibir exatamente a data informada, sem redução de 1 dia).
+
+Permitir uso de acentos e caracteres especiais nos campos Título de Serviço e Descrição.
+
+Tarefa 2 – Dashboard
+
+Aba "Administrados": manter apenas Perfil, Configurações, Sair, Administração de Serviços.
+
+Em Administração de Serviços: listar todos os serviços do banco de dados, agrupados por mês (do mais recente para o mais antigo), permitindo edição completa (todos os campos de "Novo Serviço") e exclusão.
+
+Ajuste visual nos cards de serviços resolvidos, pendentes e programados:
+  • Unificar em uma única linha.
+  • Quando for Incluído no pacote mensal: remover "Valor" e manter o ícone de check ✅.
+  • Quando for Cortesia: exibir o ícone de mão com sinal positivo 🤝.
+
+Ícone de Configurações: alterar "Adicionar solicitante" para "Solicitantes" e "Adicionar fornecedor" para "Fornecedores".
+
+Tarefa 3 – Detalhes do Serviço
+
+Permitir ao administrador edição completa (todos os campos de "Novo Serviço") e exclusão do serviço.
+
+Tarefa 4 – Todos os Serviços Realizados
+
+Remover o símbolo $ fixo dos cards.
+
+Exibir todos os tipos de serviços selecionados na criação, sem mostrar +1, +2 etc.
+
+Tarefa 5 – Navegação
+
+Adicionar navegação de páginas e ícone de página inicial em todas as páginas, exceto no dashboard.
+
+Por favor, confirme a conclusão de cada tarefa antes de iniciar a próxima.
+

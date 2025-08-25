@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <!-- Block Vite WebSocket and HMR attempts -->
+  <script>
+    // Override WebSocket globally before any modules load
+    const OriginalWebSocket = window.WebSocket;
+    window.WebSocket = function(url, protocols) {
+      // Block only Vite-specific WebSocket connections
+      if (url && (url.includes('/__vite_hmr') || url.includes('ws://') || url.includes('wss://'))) {
+        console.log('[WebSocket Blocked]:', url);
+        // Return a mock WebSocket that appears closed
+        return {
+          readyState: 3, // CLOSED
+          close: () => {},
+          addEventListener: () => {},
+          removeEventListener: () => {},
+          send: () => {},
+          onopen: null,
+          onclose: null,
+          onmessage: null,
+          onerror: null
+        };
+      }
+      // Allow other WebSocket connections
+      return new OriginalWebSocket(url, protocols);
+    };
+
+    // Block HMR-related fetch requests
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const url = args[0];
+      if (typeof url === 'string' && (url.includes('/@vite/') || url.includes('/__vite'))) {
+        console.log('[Fetch Blocked]:', url);
+        return Promise.resolve(new Response('', { status: 204 }));
+      }
+      return originalFetch.apply(this, args);
+    };
+
+    // Suppress Vite console messages
+    const originalConsoleLog = console.log;
+    console.log = function(...args) {
+      const message = args.join(' ');
+      if (message.includes('[vite]') || message.includes('connecting...') || message.includes('server connection lost')) {
+        return; // Suppress these messages
+      }
+      return originalConsoleLog.apply(console, args);
+    };
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

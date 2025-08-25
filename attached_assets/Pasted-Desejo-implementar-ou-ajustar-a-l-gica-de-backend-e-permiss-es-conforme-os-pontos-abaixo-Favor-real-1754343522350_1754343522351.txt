@@ -1,0 +1,118 @@
+Desejo implementar ou ajustar a lógica de backend e permissões conforme os pontos abaixo. Favor realizar as modificações necessárias apenas no backend e middleware:
+
+💾 Banco de Dados (Schema)
+Crie ou atualize o schema com as seguintes entidades:
+
+Serviços
+
+id (UUID)
+
+titulo (string)
+
+descricao (string)
+
+tipo_servico (array de string com múltiplas categorias selecionáveis: “Correção”, “Limpeza”, “Reparo”, “Instalação”, “Montagem”, “Manutenção”)
+
+status (string: "Pendente", "Resolvido", "Cancelado")
+
+data_solicitacao (date)
+
+data_conclusao (date, opcional)
+
+valor (number)
+
+incluido_no_pacote_mensal (boolean)
+
+creditos_utilizados (number, máximo 4 por mês para toda a empresa)
+
+solicitante_id (relation com solicitantes)
+
+fornecedor_id (relation com fornecedores)
+
+imagens (array de arquivos/imagens)
+
+Solicitantes
+
+id (UUID)
+
+nome (string)
+
+email (string)
+
+receber_notificacoes (boolean)
+
+Fornecedores
+
+id (UUID)
+
+nome (string)
+
+email (string)
+
+receber_notificacoes (boolean)
+
+Usuários
+
+id (UUID)
+
+nome (string)
+
+email (string)
+
+is_admin (boolean)
+
+senha (hash) — caso necessário
+
+tipo (opcional: “fornecedor”, “solicitante” ou “visualizador”)
+
+🔐 Regras de Permissão
+Apenas usuários com is_admin = true podem:
+
+Editar ou excluir qualquer serviço
+
+Visualizar, editar e excluir todos os dados
+
+Qualquer usuário autenticado (login):
+
+Pode criar novos serviços, mas não pode editar nem excluir serviços existentes
+
+Pode criar e editar solicitantes
+
+Pode visualizar fornecedores e serviços
+
+Usuários que não forem fornecedores nem solicitantes:
+
+Devem ter permissão de visualização apenas
+
+Nenhuma permissão de criação, edição ou exclusão
+
+⚙️ Middleware e Autorização
+Implemente middleware que:
+
+Verifique se o usuário é admin antes de permitir ações restritas (como exclusão ou edição de serviços)
+
+Identifique o tipo de usuário e filtre permissões
+
+Bloqueie tentativas de ultrapassar 4 créditos por mês (compartilhados entre todos os solicitantes da empresa)
+
+Permita que apenas usuários autenticados acessem os painéis e cadastros
+
+✅ Restrições e Detalhes Específicos
+O frontend já está pronto e não deve ser alterado
+
+A seleção de tipo de serviço deve permitir múltiplas categorias
+
+A caixa "Incluído no pacote mensal" deve, quando marcada, habilitar a seleção de créditos utilizados (máx. 4 por mês para a empresa)
+
+Na tabela de fornecedores, substituir o campo "telefone" por "email"
+
+Tanto fornecedores quanto solicitantes devem ter um toggle de “receber notificações por email” ao lado do campo email
+
+Se possível com os recursos do plano gratuito, implementar envio de email automático ao solicitante ou fornecedor sempre que um serviço for atualizado
+
+📝 Observações
+A empresa que contrata o sistema (Brandness) tem direito a até 4 créditos de serviços gratuitos por mês para serem distribuídos entre os solicitantes. O controle é por mês, e excedentes devem ser tratados como serviços pagos (sem impedir o registro).
+
+Os dados do usuário logado devem conter o campo is_admin ou outra forma de autenticação/validação de permissões no middleware.
+
+🔄 Prossiga com a implementação no backend conforme acima, sem alterações no layout visual.

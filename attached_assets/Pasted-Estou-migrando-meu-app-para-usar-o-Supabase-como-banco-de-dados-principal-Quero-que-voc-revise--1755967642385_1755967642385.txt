@@ -1,0 +1,203 @@
+Estou migrando meu app para usar o Supabase como banco de dados principal.  
+Quero que você revise e ajuste TODO o app seguindo estas instruções organizadas em sessões:  
+
+---
+
+1) Conexão Supabase com Drizzle (ou Prisma se for mais estável)
+
+Substitua qualquer conexão local de banco de dados por Supabase.  
+Use a porta **6543 (Transaction Pooler)** no Replit, já configurada no .env.  
+
+Exemplo com Drizzle + pg:
+
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import 'dotenv/config';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+export const db = drizzle(pool);
+
+⚠️ Remova qualquer conexão local (SQLite, Postgres local, etc.) para evitar conflito.
+
+---
+
+2) Variáveis de Ambiente
+
+Confirme que o `.env` contém:
+
+DATABASE_URL=postgresql://postgres.wxyz:Brandness2025@aws-xxx.supabase.co:6543/postgres
+
+SUPABASE_URL=https://your-project-ref.supabase.co
+SUPABASE_ANON_KEY=your-anon-key-here
+
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
+
+NODE_ENV=development
+
+---
+
+3) Middleware e DevTools
+
+Ativar CORS e JSON para garantir comunicação entre frontend e backend:
+
+import cors from 'cors';
+import express from 'express';
+
+const app = express();
+app.use(cors({ origin: '*' }));
+app.use(express.json());
+
+---
+
+4) Tabelas no Supabase
+
+Certifique-se de que as tabelas abaixo foram criadas no Supabase (via migração ou SQL Editor):
+
+users (id, nome, email, senha, role)
+solicitantes (id, nome, email, telefone)
+fornecedores (id, nome, email, telefone)
+servicos (id, title, serviceType, fornecedorId, solicitanteId)
+
+---
+
+5) CRUD de Solicitantes
+
+// Criar
+app.post('/api/solicitantes', async (req, res) => {
+  const { nome, email, telefone } = req.body;
+  const novo = await db.insert(solicitantes).values({ nome, email, telefone }).returning();
+  res.json(novo);
+});
+
+// Listar
+app.get('/api/solicitantes', async (req, res) => {
+  const todos = await db.select().from(solicitantes);
+  res.json(todos);
+});
+
+// Atualizar
+app.put('/api/solicitantes/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nome, email, telefone } = req.body;
+  const atualizado = await db.update(solicitantes).set({ nome, email, telefone }).where(eq(solicitantes.id, id)).returning();
+  res.json(atualizado);
+});
+
+// Deletar
+app.delete('/api/solicitantes/:id', async (req, res) => {
+  const { id } = req.params;
+  await db.delete(solicitantes).where(eq(solicitantes.id, id));
+  res.json({ success: true });
+});
+
+---
+
+6) CRUD de Fornecedores
+
+(apply mesma lógica do item 5, mas na tabela fornecedores)
+
+---
+
+7) CRUD de Serviços
+
+// Criar
+app.post('/api/servicos', async (req, res) => {
+  const { title, serviceType, fornecedorId, solicitanteId } = req.body;
+  const novo = await db.insert(servicos).values({ title, serviceType, fornecedorId, solicitanteId }).returning();
+  res.json(novo);
+});
+
+// Listar
+app.get('/api/servicos', async (req, res) => {
+  const todos = await db.select().from(servicos);
+  res.json(todos);
+});
+
+(apply update e delete iguais ao padrão de solicitantes)
+
+---
+
+8) Autenticação
+
+⚠️ Duas opções (manter login local OU integrar com Supabase Auth via Google).  
+Se mantiver local, use bcrypt:
+
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+// Registro
+app.post('/auth/register', async (req, res) => {
+  const { nome, email, senha } = req.body;
+  const hashed = await bcrypt.hash(senha, 10);
+  const user = await db.insert(users).values({ nome, email, senha: hashed, role: 'solicitante' }).returning();
+  res.json(user);
+});
+
+// Login
+app.post('/auth/login', async (req, res) => {
+  const { email, senha } = req.body;
+  const [user] = await db.select().from(users).where(eq(users.email, email));
+  if (!user) return res.status(400).json({ error: 'Usuário não encontrado' });
+
+  const match = await bcrypt.compare(senha, user.senha);
+  if (!match) return res.status(400).json({ error: 'Senha inválida' });
+
+  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
+  res.json({ token });
+});
+
+---
+
+9) Segurança e Roles
+
+Crie middleware de permissões para Admin, Solicitante, Fornecedor, Visualizador:
+
+function checkRole(...roles) {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ error: 'Acesso negado' });
+    }
+    next();
+  };
+}
+
+Exemplo de uso:
+app.post('/api/servicos', checkRole('admin','fornecedor'), async (req,res)=>{...});
+
+---
+
+10) Exclusão de Banco Antigo
+
+Verifique e remova QUALQUER resquício de:
+- SQLite
+- PostgreSQL local
+- Arquivos db.json
+- Conexões antigas não relacionadas ao Supabase
+
+O app deve ter **apenas 1 banco ativo: Supabase**.
+
+---
+
+11) Testes manuais pós-deploy
+
+Confirme:
+
+- Criar/editar/excluir **Solicitantes**
+- Criar/editar/excluir **Fornecedores**
+- Criar/editar/excluir **Serviços**
+- Usuários novos persistem corretamente no Supabase
+- Supabase Console exibe dados ao vivo
+
+---
+
+✅ OBJETIVO FINAL
+
+- Todo o app usa Supabase
+- Nenhum banco local conflitando
+- CRUDs funcionando (serviços, solicitantes, fornecedores)
+- Usuários e permissões configurados
+- Painel do Supabase reflete todos os dados
