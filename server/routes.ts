@@ -1006,7 +1006,7 @@ router.get("/api/services/:id", async (req: express.Request, res) => {
 // Helper function to send new service notification emails
 async function sendNewServiceNotificationEmails(service: any, requesterId: string | null, providerId: string | null) {
   const { supabase } = await import('./db');
-  
+
   // Mapear status para português
   const getStatusInPortuguese = (status: string) => {
     switch(status.toUpperCase()) {
@@ -1646,6 +1646,13 @@ router.post("/api/test-email-notifications", requireAuth, async (req, res) => {
 
 // Health check endpoint para UptimeRobot
 router.get("/health", async (req, res) => {
+  const userAgent = req.get('User-Agent') || '';
+  const isUptimeRobot = userAgent.includes('UptimeRobot') || userAgent.includes('uptimerobot');
+
+  if (isUptimeRobot) {
+    console.log(`[UptimeRobot Check] 🤖 ${userAgent}`);
+  }
+
   try {
     const startTime = Date.now();
 
@@ -1789,10 +1796,10 @@ router.get("/api/monitor", async (req, res) => {
   try {
     const { checkAllConnections } = await import('./db');
     const healthData = await checkAllConnections();
-    
+
     const uptime = Math.round(process.uptime());
     const uptimeFormatted = `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${uptime % 60}s`;
-    
+
     res.status(200).json({
       ...healthData,
       uptimeSeconds: uptime,
@@ -1801,7 +1808,7 @@ router.get("/api/monitor", async (req, res) => {
       replicationId: process.env.REPL_ID || 'development',
       monitor: 'complete'
     });
-    
+
   } catch (error) {
     res.status(503).json({
       status: 'error',

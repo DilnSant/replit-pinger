@@ -39,7 +39,7 @@ https://b11959b9-296f-4b48-a6a9-962290608715-00-2aki85zt5f42b.kirk.replit.dev
 - **Monitor Type**: HTTP(s)
 - **URL**: `https://b11959b9-296f-4b48-a6a9-962290608715-00-2aki85zt5f42b.kirk.replit.dev`
 - **Monitoring Interval**: 5 minutos
-- **Monitor Timeout**: 30 segundos
+- **Monitor Timeout**: 45 segundos
 - **HTTP Method**: GET
 - **Keyword Monitoring**: (deixar vazio)
 
