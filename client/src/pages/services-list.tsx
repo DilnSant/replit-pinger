@@ -115,6 +115,32 @@ export default function ServicesListPage() {
       // For PENDENTE and PROGRAMADO, group by status
       groupedServices[statusFilter] = filteredServices;
     }
+  } else if (monthlyFilter || courtesyFilter) {
+    // If filtering by monthly or courtesy, use filtered services
+    const pendingServices = filteredServices.filter(service => service.status === 'PENDENTE');
+    const scheduledServices = filteredServices.filter(service => service.status === 'PROGRAMADO');
+    const resolvedServices = filteredServices.filter(service => service.status === 'RESOLVIDO');
+
+    if (pendingServices.length > 0) {
+      groupedServices['PENDENTE'] = pendingServices;
+    }
+    if (scheduledServices.length > 0) {
+      groupedServices['PROGRAMADO'] = scheduledServices;
+    }
+
+    // Group resolved services by month/year
+    resolvedServices.reduce((groups, service) => {
+      // Use completion date if available, otherwise use request date
+      const dateToUse = service.completionDate || service.requestDate || service.createdAt;
+      const date = new Date(dateToUse);
+      const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+      if (!groups[monthYear]) {
+        groups[monthYear] = [];
+      }
+      groups[monthYear].push(service);
+      return groups;
+    }, groupedServices);
   } else {
     // Show all services grouped by status
     const pendingServices = services.filter(service => service.status === 'PENDENTE');
