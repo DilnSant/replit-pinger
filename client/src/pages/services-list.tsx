@@ -75,20 +75,39 @@ export default function ServicesListPage() {
 
   // Filter services based on status, monthly package, or courtesy
   const filteredServices = useMemo(() => {
+    console.log('🔍 DEBUG: Filtering services');
+    console.log('🔍 Total services:', services.length);
+    console.log('🔍 courtesyFilter:', courtesyFilter);
+    console.log('🔍 monthlyFilter:', monthlyFilter);
+    console.log('🔍 statusFilter:', statusFilter);
+    
+    // Check what courtesy services exist
+    const courtesyServices = services.filter(s => s.isCourtesy === true);
+    console.log('🔍 Found courtesy services:', courtesyServices.length);
+    if (courtesyServices.length > 0) {
+      console.log('🔍 Sample courtesy service:', courtesyServices[0]);
+    }
+    
     let filtered = services;
 
     if (statusFilter) {
       filtered = filtered.filter(service => service.status === statusFilter);
+      console.log('🔍 After status filter:', filtered.length);
     }
 
     if (monthlyFilter) {
       filtered = filtered.filter(service => service.isMonthlyPackage);
+      console.log('🔍 After monthly filter:', filtered.length);
     }
 
     if (courtesyFilter) {
-      filtered = filtered.filter(service => service.isCourtesy);
+      console.log('🔍 Applying courtesy filter...');
+      filtered = filtered.filter(service => service.isCourtesy === true);
+      console.log('🔍 After courtesy filter:', filtered.length);
+      console.log('🔍 Filtered courtesy services:', filtered.map(s => ({ id: s.id, title: s.title, isCourtesy: s.isCourtesy })));
     }
 
+    console.log('🔍 Final filtered services:', filtered.length);
     return filtered;
   }, [services, statusFilter, monthlyFilter, courtesyFilter]);
 
