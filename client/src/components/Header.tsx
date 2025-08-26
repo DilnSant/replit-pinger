@@ -161,8 +161,10 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                 <div className="flex flex-col">
                   <h1 className="text-xs sm:text-2xl font-bold text-white leading-tight">
-                    <span className="block sm:inline">Gestão de Serviços</span>
-                    <span className="block sm:inline sm:ml-1">Método Brandness</span>
+                    <div className="flex justify-between items-center w-full">
+                      <span className="text-left">Gestão de Serviços</span>
+                      <span className="text-right">Método Brandness</span>
+                    </div>
                   </h1>
                   {/* Mobile Services Counter */}
                   <div className="flex items-center space-x-1 mt-1 sm:hidden">

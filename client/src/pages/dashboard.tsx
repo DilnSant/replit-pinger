@@ -195,7 +195,7 @@ export default function Dashboard() {
         selectedMonth={selectedMonth}
         selectedYear={selectedYear}
         onMonthChange={handleMonthChange}
-        totalResolvedServices={resolvedServices.length}
+        totalResolvedServices={allResolvedServices.length}
       />
 
       <main className="max-w-7xl mx-auto py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
