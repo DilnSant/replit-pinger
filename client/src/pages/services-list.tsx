@@ -48,6 +48,12 @@ export default function ServicesListPage() {
   const courtesyFilter = searchParams.get('courtesy') === 'true';
   const serviceIdFromUrl = searchParams.get('service') || null;
 
+  // Debug logs
+  console.log('URL location:', location);
+  console.log('StatusFilter:', statusFilter);
+  console.log('MonthlyFilter:', monthlyFilter);
+  console.log('CourtesyFilter:', courtesyFilter);
+
   const { data: servicesResponse } = useQuery<{
     services: Service[];
     pagination: {
@@ -75,20 +81,30 @@ export default function ServicesListPage() {
 
   // Filter services based on status, monthly package, or courtesy
   const filteredServices = useMemo(() => {
+    console.log('All services:', services.length);
+    console.log('Sample service structure:', services[0]);
+    
     let filtered = services;
 
     if (statusFilter) {
       filtered = filtered.filter(service => service.status === statusFilter);
+      console.log('After status filter:', filtered.length);
     }
 
     if (monthlyFilter) {
+      const beforeCount = filtered.length;
       filtered = filtered.filter(service => service.isMonthlyPackage);
+      console.log('Monthly filter applied:', beforeCount, '->', filtered.length, 'services have isMonthlyPackage=true');
     }
 
     if (courtesyFilter) {
+      const beforeCount = filtered.length;
       filtered = filtered.filter(service => service.isCourtesy);
+      console.log('Courtesy filter applied:', beforeCount, '->', filtered.length, 'services have isCourtesy=true');
+      console.log('First 3 courtesy services:', filtered.slice(0, 3).map(s => ({ id: s.id, title: s.title, isCourtesy: s.isCourtesy })));
     }
 
+    console.log('Final filtered services:', filtered.length);
     return filtered;
   }, [services, statusFilter, monthlyFilter, courtesyFilter]);
 
