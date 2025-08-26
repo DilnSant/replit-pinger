@@ -48,16 +48,6 @@ export default function ServicesListPage() {
   const courtesyFilter = searchParams.get('courtesy') === 'true';
   const serviceIdFromUrl = searchParams.get('service') || null;
 
-  // Debug URL parsing
-  console.log('🔍 URL location:', location);
-  console.log('🔍 StatusFilter:', statusFilter);
-  console.log('🔍 MonthlyFilter:', monthlyFilter);
-  console.log('🔍 CourtesyFilter:', courtesyFilter);
-  console.log('🔍 All services:', services.length);
-  if (services.length > 0) {
-    console.log('🔍 Sample service structure:', services[0]);
-  }
-
   const { data: servicesResponse } = useQuery<{
     services: Service[];
     pagination: {
@@ -72,6 +62,16 @@ export default function ServicesListPage() {
   });
 
   const services = servicesResponse?.services || [];
+
+  // Debug URL parsing - moved here after services is defined
+  console.log('🔍 URL location:', location);
+  console.log('🔍 StatusFilter:', statusFilter);
+  console.log('🔍 MonthlyFilter:', monthlyFilter);
+  console.log('🔍 CourtesyFilter:', courtesyFilter);
+  console.log('🔍 All services:', services.length);
+  if (services.length > 0) {
+    console.log('🔍 Sample service structure:', services[0]);
+  }
 
   // If a specific service is requested, open it directly
   useEffect(() => {
