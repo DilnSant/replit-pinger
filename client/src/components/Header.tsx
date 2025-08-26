@@ -151,19 +151,14 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16">
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Desktop icon - only visible on larger screens */}
-            <div className="hidden sm:flex w-10 h-10 bg-white rounded-lg items-center justify-center">
-              <Wrench className="text-lg" style={{ color: '#004182' }} />
-            </div>
             
             {/* Title Section */}
             <div className="flex flex-col">
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                 <div className="flex flex-col">
-                  <h1 className="text-xs sm:text-2xl font-medium text-white leading-tight">
+                  <h1 className="text-xs sm:text-xl font-medium text-white leading-tight">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full">
-                      <span className="text-left">Gestão de Serviços</span>
-                      <span className="text-left sm:text-right">Método Brandness</span>
+                      <span className="text-left">Gestão de Serviços Método Brandness</span>
                     </div>
                   </h1>
                   {/* Mobile Services Counter */}
@@ -183,11 +178,11 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
                 {/* Desktop Services Counter Indicator */}
                 <div className="hidden sm:inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
                   <div className="flex items-center space-x-2">
-                    <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     <span className="font-semibold">{totalResolvedServices}</span>
-                    <span className="text-xs text-white/80">realizados</span>
+                    <span className="text-xs text-white/80">Serviços Realizados</span>
                   </div>
                 </div>
               </div>
@@ -211,7 +206,7 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
 
             {/* Month Filter - Mobile */}
             <Select value={selectedYear ? `${selectedMonth}-${selectedYear}` : ''} onValueChange={handleMonthSelect}>
-              <SelectTrigger className="h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-22 flex sm:hidden text-xs pt-[0px] pb-[0px] pl-[4px] pr-[4px] ml-[0px] mr-[0px]">
+              <SelectTrigger className="h-7 items-center justify-between rounded-md border border-input bg-background px-2 py-1 ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-20 flex sm:hidden text-xs">
                 <SelectValue placeholder="Mês/Ano" />
               </SelectTrigger>
               <SelectContent>
@@ -226,8 +221,8 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
             {/* Settings Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="hidden sm:inline-flex text-blue-600 hover:bg-blue-600 hover:text-white transition-colors">
-                  <Settings className="h-4 w-4" />
+                <Button variant="ghost" className="hidden sm:inline-flex text-white hover:bg-white/20 transition-colors">
+                  <Settings className="h-8 w-8" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 bg-white">

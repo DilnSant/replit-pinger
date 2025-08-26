@@ -200,12 +200,11 @@ export default function Dashboard() {
 
       <main className="max-w-7xl mx-auto py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+          <div className="flex flex-row justify-between items-center gap-4 mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
             <Button 
               onClick={() => setIsNewServiceModalOpen(true)} 
-              className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
-              size="sm"
+              className="bg-blue-600 hover:bg-blue-700 text-xs px-2 py-1 h-auto"
             >
               Novo Serviço
             </Button>
