@@ -28,13 +28,19 @@ export default function StatsCards({
   const [, setLocation] = useLocation();
 
   const handleCardClick = (cardType: string) => {
+    console.log('🔥 Card clicked:', cardType);
+    
     if (cardType === 'TOTAL') {
+      console.log('🔥 Navigating to /services-list');
       setLocation('/services-list');
     } else if (cardType === 'MONTHLY') {
+      console.log('🔥 Navigating to /services-list?monthly=true');
       setLocation('/services-list?monthly=true');
     } else if (cardType === 'COURTESY') {
+      console.log('🔥 Navigating to /services-list?courtesy=true');
       setLocation('/services-list?courtesy=true');
     } else {
+      console.log(`🔥 Navigating to /services-list?status=${cardType}`);
       setLocation(`/services-list?status=${cardType}`);
     }
     // Scroll to top after navigation
