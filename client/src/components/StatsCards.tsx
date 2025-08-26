@@ -1,3 +1,4 @@
+
 import { Calendar, CheckCircle, CalendarDays, Clock, Gift, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLocation } from "wouter";
@@ -9,7 +10,7 @@ interface StatsCardsProps {
   scheduledServices: number;
   monthlyCreditsUsed: number;
   courtesyServices: number;
-  monthlyServices: number; // Added this parameter
+  monthlyServices: number;
   month: number;
   year: number;
   onMonthChange: (month: number, year: number) => void;
@@ -22,7 +23,7 @@ export default function StatsCards({
   scheduledServices,
   monthlyCreditsUsed,
   courtesyServices,
-  monthlyServices, // Added this parameter
+  monthlyServices,
   month,
   year,
   onMonthChange,
@@ -39,12 +40,12 @@ export default function StatsCards({
     } else {
       setLocation(`/services-list?status=${cardType}`);
     }
-    // Scroll to top after navigation
     setTimeout(() => window.scrollTo(0, 0), 100);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
         {/* Serviços do Mês - Filtro por mês selecionado */}
         <Card className="border-l-4 border-l-blue-500 hover:shadow-lg transition-shadow cursor-pointer"
               onClick={() => setLocation(`/services-list?month=${month}&year=${year}`)}>
@@ -151,5 +152,6 @@ export default function StatsCards({
           Cortesia
         </button>
       </div>
+    </>
   );
 }
