@@ -10,7 +10,7 @@ import ServicesCarousel from "@/components/ServicesCarousel";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Calendar, Users, Truck, DollarSign, FileText, User, MapPin, Phone, Clock, CheckCircle, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { Plus, ArrowRight, User, Building2, FileText, Building, UserPlus, LogOut, Settings, Clock, CheckCircle, Calendar, ChevronRight } from "lucide-react";
 import type { Service } from "@shared/schema";
 import { apiRequest, queryClient, getQueryFn } from "@/lib/queryClient";
 import { useQueryClient } from "@tanstack/react-query";
@@ -218,7 +218,6 @@ export default function Dashboard() {
             scheduledServices={scheduledServices.length}
             monthlyCreditsUsed={filteredServices.filter(s => s.isMonthlyPackage).reduce((total, service) => total + (service.creditsUsed || 0), 0)}
             courtesyServices={filteredServices.filter(s => s.isCourtesy).length}
-            monthlyServices={filteredServices.filter(s => s.isMonthlyPackage).length}
             month={selectedMonth}
             year={selectedYear}
             onMonthChange={handleMonthChange}
@@ -233,50 +232,11 @@ export default function Dashboard() {
             />
           </div>
 
-          {/* Quick Access Links */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Acesso Rápido</h3>
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <button 
-                onClick={() => setLocation('/services-list?status=RESOLVIDO')}
-                className="flex flex-col items-center gap-2 text-green-600 hover:text-green-800 font-medium transition-colors"
-              >
-                <div className="text-green-500">
-                  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                  </svg>
-                </div>
-                <span>Resolvidos</span>
-                <span className="text-xs text-gray-500">({allResolvedServices.length})</span>
-              </button>
 
-              <button 
-                onClick={() => setLocation('/services-list?monthly=true')}
-                className="flex flex-col items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors"
-              >
-                <div className="text-blue-500">
-                  <Check className="h-8 w-8" />
-                </div>
-                <span>Incluídos</span>
-                <span className="text-xs text-gray-500">({allServices.filter(s => s.isMonthlyPackage || s.is_monthly_package).length})</span>
-              </button>
 
-              <button 
-                onClick={() => setLocation('/services-list?courtesy=true')}
-                className="flex flex-col items-center gap-2 text-pink-600 hover:text-pink-800 font-medium transition-colors"
-              >
-                <div className="text-pink-500">
-                  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                </div>
-                <span>Cortesia</span>
-                <span className="text-xs text-gray-500">({allServices.filter(s => s.isCourtesy || s.is_courtesy).length})</span>
-              </button>
-            </div>
-          </div>
 
-          {/* Services Tabs */}
+
+
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <Tabs defaultValue="pending" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-gray-50 border-b">

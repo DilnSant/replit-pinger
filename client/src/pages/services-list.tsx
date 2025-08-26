@@ -41,13 +41,11 @@ export default function ServicesListPage() {
   const [location, setLocation] = useLocation();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
-  // Get status filter, monthly filter, courtesy filter, and month/year filters from URL params
+  // Get status filter, monthly filter, and courtesy filter from URL params
   const searchParams = new URLSearchParams(location.split('?')[1] || '');
   const statusFilter = searchParams.get('status');
   const monthlyFilter = searchParams.get('monthly') === 'true';
   const courtesyFilter = searchParams.get('courtesy') === 'true';
-  const monthFilter = searchParams.get('month') ? parseInt(searchParams.get('month')!) : null;
-  const yearFilter = searchParams.get('year') ? parseInt(searchParams.get('year')!) : null;
   const serviceIdFromUrl = searchParams.get('service') || null;
 
   const { data: servicesResponse } = useQuery<{
@@ -75,35 +73,17 @@ export default function ServicesListPage() {
     }
   }, [serviceIdFromUrl, services]);
 
-  // Filter services based on status, monthly package, courtesy, and month/year
+  // Filter services based on status, monthly package, or courtesy
   const filteredServices = useMemo(() => {
     console.log('🔍 DEBUG: Filtering services');
     console.log('🔍 Total services:', services.length);
     console.log('🔍 courtesyFilter:', courtesyFilter);
     console.log('🔍 monthlyFilter:', monthlyFilter);
     console.log('🔍 statusFilter:', statusFilter);
-    console.log('🔍 monthFilter:', monthFilter);
-    console.log('🔍 yearFilter:', yearFilter);
     
     let filtered = [...services]; // Create a copy of services array
 
-    // First, apply month/year filter if specified
-    if (monthFilter !== null && yearFilter !== null) {
-      console.log('🔍 Applying month/year filter...');
-      filtered = filtered.filter(service => {
-        const dateField = service.requestDate || service.request_date || service.createdAt;
-        if (!dateField) return false;
-        
-        const serviceDate = new Date(dateField);
-        const serviceMonth = serviceDate.getMonth() + 1; // getMonth() returns 0-11
-        const serviceYear = serviceDate.getFullYear();
-        
-        return serviceMonth === monthFilter && serviceYear === yearFilter;
-      });
-      console.log('🔍 After month/year filter:', filtered.length);
-    }
-
-    // Then apply other filters
+    // Apply filters in order of specificity
     if (courtesyFilter) {
       console.log('🔍 Applying courtesy filter...');
       // Filter for services where isCourtesy is true OR is_courtesy is true (handle both field names)
@@ -111,6 +91,12 @@ export default function ServicesListPage() {
         service.isCourtesy === true || service.is_courtesy === true
       );
       console.log('🔍 After courtesy filter:', filtered.length);
+      console.log('🔍 Filtered courtesy services:', filtered.map(s => ({ 
+        id: s.id, 
+        title: s.title, 
+        isCourtesy: s.isCourtesy, 
+        is_courtesy: s.is_courtesy 
+      })));
     } else if (monthlyFilter) {
       console.log('🔍 Applying monthly filter...');
       filtered = filtered.filter(service => 
@@ -125,7 +111,7 @@ export default function ServicesListPage() {
 
     console.log('🔍 Final filtered services:', filtered.length);
     return filtered;
-  }, [services, statusFilter, monthlyFilter, courtesyFilter, monthFilter, yearFilter]);
+  }, [services, statusFilter, monthlyFilter, courtesyFilter]);
 
   // Group services by status first, then by month/year for resolved services
   const groupedServices: GroupedServices = {};
@@ -302,13 +288,9 @@ export default function ServicesListPage() {
               Voltar ao Dashboard
             </Button>
             <h1 className="text-2xl font-bold text-blue-900">
-              {courtesyFilter ? 
-                (monthFilter && yearFilter ? `Serviços Cortesia - ${monthFilter}/${yearFilter}` : 'Serviços Cortesia') :
-               monthlyFilter ? 
-                (monthFilter && yearFilter ? `Serviços Incluídos - ${monthFilter}/${yearFilter}` : 'Serviços do Pacote Mensal') : 
-               statusFilter ? 
-                (monthFilter && yearFilter ? `Serviços ${statusLabels[statusFilter as keyof typeof statusLabels]} - ${monthFilter}/${yearFilter}` : `Serviços ${statusLabels[statusFilter as keyof typeof statusLabels]}`) :
-               monthFilter && yearFilter ? `Serviços do Mês - ${monthFilter}/${yearFilter}` :
+              {courtesyFilter ? 'Serviços Cortesia' :
+               monthlyFilter ? 'Serviços do Pacote Mensal' : 
+               statusFilter ? `Serviços ${statusLabels[statusFilter as keyof typeof statusLabels]}` : 
                'Lista de Serviços'}
             </h1>
           </div>
@@ -320,14 +302,10 @@ export default function ServicesListPage() {
           <div className="text-center py-12">
             <div className="text-6xl text-gray-300 mb-4">📋</div>
             <p className="text-gray-500 text-lg">
-              {courtesyFilter ? 
-                (monthFilter && yearFilter ? `Nenhum serviço cortesia encontrado para ${monthFilter}/${yearFilter}` : 'Nenhum serviço cortesia encontrado') :
-               monthlyFilter ? 
-                (monthFilter && yearFilter ? `Nenhum serviço incluído encontrado para ${monthFilter}/${yearFilter}` : 'Nenhum serviço incluído no pacote mensal encontrado') : 
-               statusFilter ? 
-                (monthFilter && yearFilter ? `Nenhum serviço ${statusLabels[statusFilter as keyof typeof statusLabels]?.toLowerCase()} encontrado para ${monthFilter}/${yearFilter}` : `Nenhum serviço ${statusLabels[statusFilter as keyof typeof statusLabels]?.toLowerCase()} encontrado`) :
-               monthFilter && yearFilter ? `Nenhum serviço encontrado para ${monthFilter}/${yearFilter}` :
-               'Nenhum serviço encontrado'
+              {courtesyFilter ? 'Nenhum serviço cortesia encontrado' :
+               monthlyFilter ? 'Nenhum serviço incluído no pacote mensal encontrado' : 
+               statusFilter ? `Nenhum serviço ${statusLabels[statusFilter as keyof typeof statusLabels]?.toLowerCase()} encontrado`
+                : 'Nenhum serviço encontrado'
               }
             </p>
           </div>
