@@ -46,78 +46,74 @@ export default function StatsCards({
       {/* Serviços do Mês */}
       <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-lg transition-all"
               onClick={() => handleCardClick('TOTAL')}>
-          <CardContent className="p-4 sm:p-6">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl sm:text-2xl font-bold">{totalServices}</p>
                 <p className="text-blue-100 text-sm font-medium">Serviços do Mês</p>
-                <p className="text-2xl sm:text-3xl font-bold">{totalServices}</p>
               </div>
               <div className="text-blue-200">
-                <Calendar className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Calendar className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Inclusos no Plano Mensal */}
-        <Card className="hover:shadow-md transition-shadow cursor-pointer hover:shadow-lg"
-              onClick={() => handleCardClick('MONTHLY')}>
-          <CardContent className="p-4 sm:p-6">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl sm:text-2xl font-bold text-green-600">{monthlyCreditsUsed}</p>
                 <p className="text-gray-600 text-sm font-medium">Serviços Incluídos</p>
-                <p className="text-2xl sm:text-3xl font-bold text-green-600">{monthlyCreditsUsed}</p>
               </div>
               <div className="text-green-500">
-                <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8" />
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Serviços Agendados */}
-        <Card className="hover:shadow-md transition-shadow cursor-pointer hover:shadow-lg"
-              onClick={() => handleCardClick('PROGRAMADO')}>
-          <CardContent className="p-4 sm:p-6">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl sm:text-2xl font-bold text-blue-600">{scheduledServices}</p>
                 <p className="text-gray-600 text-sm font-medium">Serviços Agendados</p>
-                <p className="text-2xl sm:text-3xl font-bold text-blue-600">{scheduledServices}</p>
               </div>
               <div className="text-blue-500">
-                <CalendarDays className="h-6 w-6 sm:h-8 sm:w-8" />
+                <CalendarDays className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Serviços Cortesia */}
-        <Card className="hover:shadow-md transition-shadow cursor-pointer hover:shadow-lg"
-              onClick={() => handleCardClick('COURTESY')}>
-          <CardContent className="p-4 sm:p-6">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl sm:text-2xl font-bold text-purple-600">{courtesyServices}</p>
                 <p className="text-gray-600 text-sm font-medium">Serviços Cortesia</p>
-                <p className="text-2xl sm:text-3xl font-bold text-purple-600">{courtesyServices}</p>
               </div>
               <div className="text-purple-500">
-                <Gift className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Gift className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Pendentes */}
-        <Card className="hover:shadow-md transition-shadow cursor-pointer hover:shadow-lg"
-              onClick={() => handleCardClick('PENDENTE')}>
-          <CardContent className="p-4 sm:p-6">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl sm:text-2xl font-bold text-orange-500">{pendingServices}</p>
                 <p className="text-gray-600 text-sm font-medium">Serviços Pendentes</p>
-                <p className="text-2xl sm:text-3xl font-bold text-orange-500">{pendingServices}</p>
               </div>
               <div className="text-orange-500">
-                <Clock className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </CardContent>

@@ -241,37 +241,17 @@ export default function Dashboard() {
             <Tabs defaultValue="pending" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-gray-50 border-b">
                 <TabsTrigger value="pending" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Pendentes ({pendingServices.length})
+                  Serviços Resolvidos ({allResolvedServices.length})
                 </TabsTrigger>
                 <TabsTrigger value="resolved" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Resolvidos ({allResolvedServices.length})
+                  Serviços Incluídos ({filteredServices.filter(s => s.isMonthlyPackage).length})
                 </TabsTrigger>
                 <TabsTrigger value="scheduled" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Agendados ({scheduledServices.length})
+                  Serviços Cortesia ({filteredServices.filter(s => s.isCourtesy).length})
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="pending" className="p-6">
-                {pendingServices.length > 0 ? (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {pendingServices.map((service) => (
-                      <ServiceCard 
-                        key={service.id} 
-                        service={service} 
-                        onUpdate={handleServiceCreated}
-                        isAdmin={isAdmin} 
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <div className="text-6xl text-gray-300 mb-4">⏳</div>
-                    <p className="text-gray-500 text-lg">Nenhum serviço pendente</p>
-                  </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="resolved" className="p-6">
                 {allResolvedServices.length > 0 ? (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {allResolvedServices
@@ -293,10 +273,13 @@ export default function Dashboard() {
                 )}
               </TabsContent>
 
-              <TabsContent value="scheduled" className="p-6">
-                {scheduledServices.length > 0 ? (
+              <TabsContent value="resolved" className="p-6">
+                {filteredServices.filter(s => s.isMonthlyPackage).length > 0 ? (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {scheduledServices.map((service) => (
+                    {filteredServices
+                      .filter(s => s.isMonthlyPackage)
+                      .sort((a, b) => new Date(b.requestDate || b.createdAt).getTime() - new Date(a.requestDate || a.createdAt).getTime())
+                      .map((service) => (
                       <ServiceCard 
                         key={service.id} 
                         service={service} 
@@ -307,8 +290,31 @@ export default function Dashboard() {
                   </div>
                 ) : (
                   <div className="text-center py-12">
-                    <div className="text-6xl text-gray-300 mb-4">📅</div>
-                    <p className="text-gray-500 text-lg">Nenhum serviço agendado</p>
+                    <div className="text-6xl text-gray-300 mb-4">✓</div>
+                    <p className="text-gray-500 text-lg">Nenhum serviço incluído no plano</p>
+                  </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="scheduled" className="p-6">
+                {filteredServices.filter(s => s.isCourtesy).length > 0 ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {filteredServices
+                      .filter(s => s.isCourtesy)
+                      .sort((a, b) => new Date(b.requestDate || b.createdAt).getTime() - new Date(a.requestDate || a.createdAt).getTime())
+                      .map((service) => (
+                      <ServiceCard 
+                        key={service.id} 
+                        service={service} 
+                        onUpdate={handleServiceCreated}
+                        isAdmin={isAdmin} 
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl text-gray-300 mb-4">🎁</div>
+                    <p className="text-gray-500 text-lg">Nenhum serviço cortesia</p>
                   </div>
                 )}
               </TabsContent>
