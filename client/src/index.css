@@ -60,6 +60,10 @@
   body:not(.dark) {
     background-color: #D0D6DD;
   }
+  
+  body:not(.dark) {
+    background-color: #D0D6DD;
+  }
 }
 
 /* Custom hover effects for dropdown menus */
