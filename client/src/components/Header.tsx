@@ -150,25 +150,43 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
     <header className="shadow-sm border-b border-blue-300 sticky top-0 z-50" style={{ backgroundColor: '#004182' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16">
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Desktop icon - only visible on larger screens */}
+            <div className="hidden sm:flex w-10 h-10 bg-white rounded-lg items-center justify-center">
               <Wrench className="text-lg" style={{ color: '#004182' }} />
             </div>
-            <h1 className="text-sm sm:text-2xl font-bold text-white">Gestão Método Brandness</h1>
-            {isAdmin && (
-              <div className="hidden sm:inline-block bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium border border-red-200">
-                🔐 Modo Administrador
-              </div>
-            )}
             
-            {/* Services Counter Indicator */}
-            <div className="hidden sm:inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
-              <div className="flex items-center space-x-2">
-                <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span className="font-semibold">{totalResolvedServices}</span>
-                <span className="text-xs text-white/80">realizados</span>
+            {/* Title Section */}
+            <div className="flex flex-col">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                <div className="flex flex-col">
+                  <h1 className="text-xs sm:text-2xl font-bold text-white leading-tight">
+                    <span className="block sm:inline">Gestão de Serviços</span>
+                    <span className="block sm:inline sm:ml-1">Método Brandness</span>
+                  </h1>
+                  {/* Mobile Services Counter */}
+                  <div className="flex items-center space-x-1 mt-1 sm:hidden">
+                    <span className="text-xs text-white/90 font-medium">{totalResolvedServices}</span>
+                    <span className="text-xs text-white/70">Total Realizado</span>
+                  </div>
+                </div>
+                
+                {isAdmin && (
+                  <div className="hidden sm:inline-block bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium border border-red-200">
+                    🔐 Modo Administrador
+                  </div>
+                )}
+                
+                {/* Desktop Services Counter Indicator */}
+                <div className="hidden sm:inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
+                  <div className="flex items-center space-x-2">
+                    <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span className="font-semibold">{totalResolvedServices}</span>
+                    <span className="text-xs text-white/80">realizados</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
