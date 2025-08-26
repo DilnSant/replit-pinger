@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Settings, User as UserIcon, LogOut, UserPlus, Building, Users, List, Wrench, Home, Building2, User, Shield, Menu, X } from "lucide-react";
+import { Settings, User as UserIcon, LogOut, UserPlus, Building, Users, List, Wrench, Home, Building2, User, Shield, Menu, X, CheckCircle } from "lucide-react";
 import { useLocation } from "wouter";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -161,13 +161,14 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                 <div className="flex flex-col">
                   <h1 className="text-xs sm:text-2xl font-medium text-white leading-tight">
-                    <div className="flex justify-between items-center w-full">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full">
                       <span className="text-left">Gestão de Serviços</span>
-                      <span className="text-right">Método Brandness</span>
+                      <span className="text-left sm:text-right">Método Brandness</span>
                     </div>
                   </h1>
                   {/* Mobile Services Counter */}
                   <div className="flex items-center space-x-1 mt-1 sm:hidden">
+                    <CheckCircle className="h-3 w-3 text-white/90" />
                     <span className="text-xs text-white/90 font-medium">{totalResolvedServices}</span>
                     <span className="text-xs text-white/70">Serviços Realizados</span>
                   </div>
