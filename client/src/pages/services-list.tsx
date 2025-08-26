@@ -63,16 +63,6 @@ export default function ServicesListPage() {
 
   const services = servicesResponse?.services || [];
 
-  // Debug URL parsing - moved here after services is defined
-  console.log('🔍 URL location:', location);
-  console.log('🔍 StatusFilter:', statusFilter);
-  console.log('🔍 MonthlyFilter:', monthlyFilter);
-  console.log('🔍 CourtesyFilter:', courtesyFilter);
-  console.log('🔍 All services:', services.length);
-  if (services.length > 0) {
-    console.log('🔍 Sample service structure:', services[0]);
-  }
-
   // If a specific service is requested, open it directly
   useEffect(() => {
     if (serviceIdFromUrl && services.length > 0) {
@@ -91,41 +81,15 @@ export default function ServicesListPage() {
     console.log('🔍 monthlyFilter:', monthlyFilter);
     console.log('🔍 statusFilter:', statusFilter);
     
-    // Check what courtesy services exist before filtering
-    if (services.length > 0) {
-      const courtesyServices = services.filter(s => s.isCourtesy === true || s.is_courtesy === true);
-      console.log('🔍 Found courtesy services in total:', courtesyServices.length);
-      if (courtesyServices.length > 0) {
-        console.log('🔍 Sample courtesy service:', {
-          id: courtesyServices[0].id,
-          title: courtesyServices[0].title,
-          isCourtesy: courtesyServices[0].isCourtesy,
-          is_courtesy: courtesyServices[0].is_courtesy
-        });
-      }
-    }
-    
     let filtered = [...services]; // Create a copy of services array
 
     // Apply filters in order of specificity
     if (courtesyFilter) {
       console.log('🔍 Applying courtesy filter...');
-      console.log('🔍 Before filter - services with courtesy flags:', 
-        services.map(s => ({ 
-          id: s.id, 
-          title: s.title.substring(0, 30), 
-          isCourtesy: s.isCourtesy, 
-          is_courtesy: s.is_courtesy 
-        }))
-      );
-      
       // Filter for services where isCourtesy is true OR is_courtesy is true (handle both field names)
-      filtered = filtered.filter(service => {
-        const isCourtesy = service.isCourtesy === true || service.is_courtesy === true;
-        console.log(`🔍 Service "${service.title}": isCourtesy=${service.isCourtesy}, is_courtesy=${service.is_courtesy}, result=${isCourtesy}`);
-        return isCourtesy;
-      });
-      
+      filtered = filtered.filter(service => 
+        service.isCourtesy === true || service.is_courtesy === true
+      );
       console.log('🔍 After courtesy filter:', filtered.length);
       console.log('🔍 Filtered courtesy services:', filtered.map(s => ({ 
         id: s.id, 
