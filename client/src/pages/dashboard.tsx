@@ -237,11 +237,37 @@ export default function Dashboard() {
 
 
 
+          {/* Total Services Indicator */}
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 mb-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="bg-white/20 rounded-full p-3">
+                  <svg className="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-white text-lg font-semibold">Total de Serviços Realizados</h3>
+                  <p className="text-blue-100 text-sm">
+                    {new Date(selectedYear, selectedMonth - 1).toLocaleDateString('pt-BR', { 
+                      year: 'numeric', 
+                      month: 'long' 
+                    })}
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-4xl font-bold text-white">{resolvedServices.length}</div>
+                <div className="text-blue-100 text-sm">serviços concluídos</div>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <Tabs defaultValue="pending" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-gray-50 border-b">
                 <TabsTrigger value="pending" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Serviços Resolvidos ({allResolvedServices.length})
+                  Serviços Resolvidos ({resolvedServices.length})
                 </TabsTrigger>
                 <TabsTrigger value="resolved" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
                   Serviços Incluídos ({filteredServices.filter(s => s.isMonthlyPackage).length})
@@ -252,9 +278,9 @@ export default function Dashboard() {
               </TabsList>
 
               <TabsContent value="pending" className="p-6">
-                {allResolvedServices.length > 0 ? (
+                {resolvedServices.length > 0 ? (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {allResolvedServices
+                    {resolvedServices
                       .sort((a, b) => new Date(b.completionDate || b.requestDate).getTime() - new Date(a.completionDate || a.requestDate).getTime())
                       .map((service) => (
                       <ServiceCard 
@@ -268,7 +294,7 @@ export default function Dashboard() {
                 ) : (
                   <div className="text-center py-12">
                     <div className="text-6xl text-gray-300 mb-4">✅</div>
-                    <p className="text-gray-500 text-lg">Nenhum serviço resolvido</p>
+                    <p className="text-gray-500 text-lg">Nenhum serviço resolvido neste mês</p>
                   </div>
                 )}
               </TabsContent>
