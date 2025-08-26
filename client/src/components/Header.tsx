@@ -14,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 
 interface HeaderProps {
@@ -189,6 +190,9 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange }: H
               </SelectContent>
             </Select>
 
+            {/* Dark Mode Toggle */}
+            <DarkModeToggle />
+
             {/* Settings Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -275,6 +279,9 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange }: H
                       </svg>
                       Suporte Desenvolvedor
                     </Button>
+                    <div className="w-full flex justify-center py-2">
+                      <DarkModeToggle />
+                    </div>
                     {isAdmin ? (
                       <>
                         <Button
