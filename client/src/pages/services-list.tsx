@@ -81,30 +81,32 @@ export default function ServicesListPage() {
     console.log('🔍 monthlyFilter:', monthlyFilter);
     console.log('🔍 statusFilter:', statusFilter);
     
-    // Check what courtesy services exist
-    const courtesyServices = services.filter(s => s.isCourtesy === true);
-    console.log('🔍 Found courtesy services:', courtesyServices.length);
-    if (courtesyServices.length > 0) {
-      console.log('🔍 Sample courtesy service:', courtesyServices[0]);
-    }
-    
-    let filtered = services;
+    let filtered = [...services]; // Create a copy of services array
 
-    if (statusFilter) {
-      filtered = filtered.filter(service => service.status === statusFilter);
-      console.log('🔍 After status filter:', filtered.length);
-    }
-
-    if (monthlyFilter) {
-      filtered = filtered.filter(service => service.isMonthlyPackage);
-      console.log('🔍 After monthly filter:', filtered.length);
-    }
-
+    // Apply filters in order of specificity
     if (courtesyFilter) {
       console.log('🔍 Applying courtesy filter...');
-      filtered = filtered.filter(service => service.isCourtesy === true);
+      // Filter for services where isCourtesy is true OR is_courtesy is true (handle both field names)
+      filtered = filtered.filter(service => 
+        service.isCourtesy === true || service.is_courtesy === true
+      );
       console.log('🔍 After courtesy filter:', filtered.length);
-      console.log('🔍 Filtered courtesy services:', filtered.map(s => ({ id: s.id, title: s.title, isCourtesy: s.isCourtesy })));
+      console.log('🔍 Filtered courtesy services:', filtered.map(s => ({ 
+        id: s.id, 
+        title: s.title, 
+        isCourtesy: s.isCourtesy, 
+        is_courtesy: s.is_courtesy 
+      })));
+    } else if (monthlyFilter) {
+      console.log('🔍 Applying monthly filter...');
+      filtered = filtered.filter(service => 
+        service.isMonthlyPackage === true || service.is_monthly_package === true
+      );
+      console.log('🔍 After monthly filter:', filtered.length);
+    } else if (statusFilter) {
+      console.log('🔍 Applying status filter...');
+      filtered = filtered.filter(service => service.status === statusFilter);
+      console.log('🔍 After status filter:', filtered.length);
     }
 
     console.log('🔍 Final filtered services:', filtered.length);
@@ -135,16 +137,20 @@ export default function ServicesListPage() {
       groupedServices[statusFilter] = filteredServices;
     }
   } else if (monthlyFilter || courtesyFilter) {
-    // If filtering by monthly or courtesy, use filtered services
+    // If filtering by monthly or courtesy, use filtered services and group by status
     const pendingServices = filteredServices.filter(service => service.status === 'PENDENTE');
     const scheduledServices = filteredServices.filter(service => service.status === 'PROGRAMADO');
     const resolvedServices = filteredServices.filter(service => service.status === 'RESOLVIDO');
+    const canceledServices = filteredServices.filter(service => service.status === 'CANCELADO');
 
     if (pendingServices.length > 0) {
       groupedServices['PENDENTE'] = pendingServices;
     }
     if (scheduledServices.length > 0) {
       groupedServices['PROGRAMADO'] = scheduledServices;
+    }
+    if (canceledServices.length > 0) {
+      groupedServices['CANCELADO'] = canceledServices;
     }
 
     // Group resolved services by month/year
@@ -162,15 +168,19 @@ export default function ServicesListPage() {
     }, groupedServices);
   } else {
     // Show all services grouped by status
-    const pendingServices = services.filter(service => service.status === 'PENDENTE');
-    const scheduledServices = services.filter(service => service.status === 'PROGRAMADO');
-    const resolvedServices = services.filter(service => service.status === 'RESOLVIDO');
+    const pendingServices = filteredServices.filter(service => service.status === 'PENDENTE');
+    const scheduledServices = filteredServices.filter(service => service.status === 'PROGRAMADO');
+    const resolvedServices = filteredServices.filter(service => service.status === 'RESOLVIDO');
+    const canceledServices = filteredServices.filter(service => service.status === 'CANCELADO');
 
     if (pendingServices.length > 0) {
       groupedServices['PENDENTE'] = pendingServices;
     }
     if (scheduledServices.length > 0) {
       groupedServices['PROGRAMADO'] = scheduledServices;
+    }
+    if (canceledServices.length > 0) {
+      groupedServices['CANCELADO'] = canceledServices;
     }
 
     // Group resolved services by month/year
