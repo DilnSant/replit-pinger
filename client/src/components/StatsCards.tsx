@@ -129,29 +129,7 @@ export default function StatsCards({
         </Card>
       </div>
 
-      {/* Quick Links */}
-      <div className="flex flex-wrap justify-center gap-4 text-sm">
-        <button 
-          onClick={() => setLocation('/services-list?status=RESOLVIDO')}
-          className="text-green-600 hover:text-green-800 font-medium"
-        >
-          Resolvidos
-        </button>
-        <span className="text-gray-400">•</span>
-        <button 
-          onClick={() => setLocation('/services-list?monthly=true')}
-          className="text-blue-600 hover:text-blue-800 font-medium"
-        >
-          Incluídos
-        </button>
-        <span className="text-gray-400">•</span>
-        <button 
-          onClick={() => setLocation('/services-list?courtesy=true')}
-          className="text-pink-600 hover:text-pink-800 font-medium"
-        >
-          Cortesia
-        </button>
-      </div>
+      
     </>
   );
 }
