@@ -21,9 +21,10 @@ interface HeaderProps {
   selectedMonth: number;
   selectedYear: number;
   onMonthChange: (month: number, year: number) => void;
+  totalResolvedServices?: number;
 }
 
-export default function Header({ selectedMonth, selectedYear, onMonthChange }: HeaderProps) {
+export default function Header({ selectedMonth, selectedYear, onMonthChange, totalResolvedServices = 0 }: HeaderProps) {
   const [, setLocation] = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAdmin] = useState(() => localStorage.getItem('isAdmin') === 'true');
@@ -159,13 +160,24 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange }: H
                 🔐 Modo Administrador
               </div>
             )}
+            
+            {/* Services Counter Indicator */}
+            <div className="hidden sm:inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
+              <div className="flex items-center space-x-2">
+                <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span className="font-semibold">{totalResolvedServices}</span>
+                <span className="text-xs text-white/80">realizados</span>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">
             {/* Month Filter - Desktop */}
             <Select value={selectedYear ? `${selectedMonth}-${selectedYear}` : ''} onValueChange={handleMonthSelect}>
-              <SelectTrigger className="w-48 hidden sm:flex">
-                <SelectValue placeholder="Selecione o Mês/Ano" />
+              <SelectTrigger className="w-36 hidden sm:flex">
+                <SelectValue placeholder="Mês/Ano" />
               </SelectTrigger>
               <SelectContent>
                 {monthOptions.map((option) => (
