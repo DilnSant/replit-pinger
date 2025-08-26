@@ -1,4 +1,3 @@
-
 import { Calendar, CheckCircle, CalendarDays, Clock, Gift, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLocation } from "wouter";
@@ -129,7 +128,7 @@ export default function StatsCards({
         </Card>
       </div>
 
-      
+
     </>
   );
 }
