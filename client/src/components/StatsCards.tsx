@@ -64,8 +64,9 @@ export default function StatsCards({
           <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-600" />
                 <p className="text-xl sm:text-2xl font-bold text-green-600">{monthlyCreditsUsed}</p>
-                <p className="text-gray-600 text-sm font-medium">Incluídos</p>
+                <p className="text-gray-600 text-sm font-medium">{monthlyCreditsUsed === 1 ? 'Crédito' : 'Créditos'}</p>
               </div>
               <div className="text-green-500">
                 <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6" />

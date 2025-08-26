@@ -121,18 +121,20 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
             <span className="text-sm text-gray-500">
               {currentIndex + 1}/{totalPages}
             </span>
-            <button
-              onClick={goToPrevious}
-              className="p-1 hover:bg-gray-100 rounded transition-colors"
-            >
-              <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
-            </button>
-            <button
-              onClick={goToNext}
-              className="p-1 hover:bg-gray-100 rounded transition-colors"
-            >
-              <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
-            </button>
+            <div className="flex items-center">
+              <button
+                onClick={goToPrevious}
+                className="p-0.5 hover:bg-gray-100 rounded transition-colors"
+              >
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="p-0.5 hover:bg-gray-100 rounded transition-colors"
+              >
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -275,7 +277,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-colors ${
+              className={`w-1 h-1 sm:w-2 sm:h-2 rounded-full transition-colors ${
                 index === currentIndex
                   ? 'bg-blue-600'
                   : 'bg-gray-300 hover:bg-gray-400'
