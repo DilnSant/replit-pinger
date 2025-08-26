@@ -114,7 +114,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
     <div className="relative">
       {/* Header com navegação */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Últimos Serviços Realizados</h3>
+        <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Últimos Serviços Realizados</h3>
 
         {totalPages > 1 && (
           <div className="flex items-center gap-2">
@@ -127,7 +127,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
               onClick={goToPrevious}
               className="h-8 w-8 p-0"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             <Button
               variant="outline"
@@ -135,7 +135,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
               onClick={goToNext}
               className="h-8 w-8 p-0"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
           </div>
         )}

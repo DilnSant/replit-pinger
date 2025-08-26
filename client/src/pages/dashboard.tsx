@@ -268,13 +268,13 @@ export default function Dashboard() {
             <Tabs defaultValue="pending" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-gray-50 border-b">
                 <TabsTrigger value="pending" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Serviços Resolvidos ({resolvedServices.length})
+                  Resolvidos ({resolvedServices.length})
                 </TabsTrigger>
                 <TabsTrigger value="resolved" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Serviços Incluídos ({filteredServices.filter(s => s.isMonthlyPackage).length})
+                  Incluídos ({filteredServices.filter(s => s.isMonthlyPackage).length})
                 </TabsTrigger>
                 <TabsTrigger value="scheduled" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                  Serviços Cortesia ({filteredServices.filter(s => s.isCourtesy).length})
+                  Cortesia ({filteredServices.filter(s => s.isCourtesy).length})
                 </TabsTrigger>
               </TabsList>
 

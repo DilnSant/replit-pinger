@@ -65,7 +65,7 @@ export default function StatsCards({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <p className="text-xl sm:text-2xl font-bold text-green-600">{monthlyCreditsUsed}</p>
-                <p className="text-gray-600 text-sm font-medium">Serviços Incluídos</p>
+                <p className="text-gray-600 text-sm font-medium">Incluídos</p>
               </div>
               <div className="text-green-500">
                 <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -95,7 +95,7 @@ export default function StatsCards({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <p className="text-xl sm:text-2xl font-bold text-purple-600">{courtesyServices}</p>
-                <p className="text-gray-600 text-sm font-medium">Serviços Cortesia</p>
+                <p className="text-gray-600 text-sm font-medium">Cortesia</p>
               </div>
               <div className="text-purple-500">
                 <Gift className="h-5 w-5 sm:h-6 sm:w-6" />
