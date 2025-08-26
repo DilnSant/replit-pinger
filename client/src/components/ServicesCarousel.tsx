@@ -114,29 +114,25 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
     <div className="relative">
       {/* Header com navegação */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Últimos Serviços Realizados</h3>
+        <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Serviços Recentes</h3>
 
         {totalPages > 1 && (
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">
-              ({currentIndex + 1} de {totalPages})
+              {currentIndex + 1}/{totalPages}
             </span>
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={goToPrevious}
-              className="h-8 w-8 p-0"
+              className="p-1 hover:bg-gray-100 rounded transition-colors"
             >
-              <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
+              <ChevronLeft className="h-2 w-2 sm:h-3 sm:w-3 text-gray-600" />
+            </button>
+            <button
               onClick={goToNext}
-              className="h-8 w-8 p-0"
+              className="p-1 hover:bg-gray-100 rounded transition-colors"
             >
-              <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
-            </Button>
+              <ChevronRight className="h-2 w-2 sm:h-3 sm:w-3 text-gray-600" />
+            </button>
           </div>
         )}
       </div>
