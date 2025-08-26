@@ -15,21 +15,31 @@ function getSupabaseClient() {
   if (_supabase) return _supabase;
 
   // Get Supabase configuration from environment variables
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseUrl = process.env.SUPABASE_URL?.trim();
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
 
-  console.log('Attempting to connect to Supabase with URL:', supabaseUrl);
+  console.log('Attempting to connect to Supabase...');
+  console.log('SUPABASE_URL length:', supabaseUrl?.length || 0);
+  console.log('SUPABASE_SERVICE_ROLE_KEY length:', supabaseServiceKey?.length || 0);
 
-  // Ensure Supabase credentials are provided
-  if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be provided');
-    console.error('Available env vars:', Object.keys(process.env).filter(key => key.includes('SUPABASE')));
-    throw new Error('Supabase credentials must be provided');
+  // Ensure Supabase credentials are provided and not empty
+  if (!supabaseUrl || !supabaseServiceKey || supabaseUrl === '' || supabaseServiceKey === '') {
+    console.error('❌ SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be provided and not empty');
+    console.error('SUPABASE_URL value:', supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'empty/undefined');
+    console.error('SUPABASE_SERVICE_ROLE_KEY value:', supabaseServiceKey ? 'present but hidden' : 'empty/undefined');
+    console.error('Available Supabase env vars:', Object.keys(process.env).filter(key => key.includes('SUPABASE')));
+    throw new Error('Supabase credentials must be provided and not empty');
   }
 
-  // Initialize Supabase client for backend operations
-  _supabase = createClient(supabaseUrl, supabaseServiceKey);
-  return _supabase;
+  try {
+    // Initialize Supabase client for backend operations
+    _supabase = createClient(supabaseUrl, supabaseServiceKey);
+    console.log('✅ Supabase client initialized successfully');
+    return _supabase;
+  } catch (error) {
+    console.error('❌ Failed to create Supabase client:', error);
+    throw new Error('Failed to initialize Supabase client');
+  }
 }
 
 // Export lazy-loaded supabase client
