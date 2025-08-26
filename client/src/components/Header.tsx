@@ -189,7 +189,7 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
             </div>
           </div>
 
-          <div className="flex items-center space-x-1 sm:space-x-4">
+          <div className="flex items-center space-x-0.5 sm:space-x-4">
             {/* Month Filter - Desktop */}
             <Select value={selectedYear ? `${selectedMonth}-${selectedYear}` : ''} onValueChange={handleMonthSelect}>
               <SelectTrigger className="w-36 hidden sm:flex">
@@ -206,7 +206,7 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
 
             {/* Month Filter - Mobile */}
             <Select value={selectedYear ? `${selectedMonth}-${selectedYear}` : ''} onValueChange={handleMonthSelect}>
-              <SelectTrigger className="h-auto items-center justify-between rounded-md border border-input bg-background px-2 py-1 ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-20 flex sm:hidden text-xs leading-tight">
+              <SelectTrigger className="h-6 items-center justify-between rounded-md border border-input bg-background px-2 py-0 ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-18 flex sm:hidden text-xs leading-tight">
                 <SelectValue placeholder="Mês/Ano" />
               </SelectTrigger>
               <SelectContent>
@@ -260,8 +260,8 @@ export default function Header({ selectedMonth, selectedYear, onMonthChange, tot
             {isMobile && (
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" className="sm:hidden w-10 h-10 text-white hover:bg-white/20 transition-colors flex items-center justify-center p-0">
-                    <Menu className="h-6 w-6" />
+                  <Button variant="ghost" className="sm:hidden w-8 h-8 text-white hover:bg-white/20 transition-colors flex items-center justify-center p-0">
+                    <Menu className="h-7 w-7" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-64 bg-white overflow-y-auto" style={{ height: 'fit-content', maxHeight: '90vh' }}>

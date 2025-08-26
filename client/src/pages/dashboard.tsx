@@ -238,17 +238,17 @@ export default function Dashboard() {
 
 
           {/* Total Services Indicator */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-4 sm:p-6 mb-6">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-3 sm:p-4 mb-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2 sm:space-x-4">
-                <div className="bg-white/20 rounded-full p-2 sm:p-3">
-                  <svg className="h-6 w-6 sm:h-8 sm:w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <div className="bg-blue-100 rounded-full p-2">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-white text-sm sm:text-lg font-semibold">Serviços Realizados</h3>
-                  <p className="text-blue-100 text-xs sm:text-sm">
+                  <h3 className="text-gray-900 text-sm sm:text-base font-medium">Serviços Realizados</h3>
+                  <p className="text-gray-500 text-xs sm:text-sm">
                     {new Date(selectedYear, selectedMonth - 1).toLocaleDateString('pt-BR', { 
                       year: 'numeric', 
                       month: 'long' 
@@ -257,8 +257,8 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-2xl sm:text-4xl font-bold text-white">{resolvedServices.length}</div>
-                <div className="text-blue-100 text-xs sm:text-sm">serviços concluídos</div>
+                <div className="text-xl sm:text-2xl font-bold text-blue-600">{resolvedServices.length}</div>
+                <div className="text-gray-500 text-xs sm:text-sm">concluídos</div>
               </div>
             </div>
           </div>

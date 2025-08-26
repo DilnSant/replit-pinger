@@ -121,7 +121,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
             <span className="text-sm text-gray-500">
               {currentIndex + 1}/{totalPages}
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center -space-x-1">
               <button
                 onClick={goToPrevious}
                 className="p-0.5 hover:bg-gray-100 rounded transition-colors"
@@ -277,7 +277,7 @@ export default function ServicesCarousel({ services, selectedMonth, selectedYear
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-1 h-1 sm:w-2 sm:h-2 rounded-full transition-colors ${
+              className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-colors ${
                 index === currentIndex
                   ? 'bg-blue-600'
                   : 'bg-gray-300 hover:bg-gray-400'
