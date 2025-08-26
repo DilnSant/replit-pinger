@@ -218,6 +218,7 @@ export default function Dashboard() {
             scheduledServices={scheduledServices.length}
             monthlyCreditsUsed={filteredServices.filter(s => s.isMonthlyPackage).reduce((total, service) => total + (service.creditsUsed || 0), 0)}
             courtesyServices={filteredServices.filter(s => s.isCourtesy).length}
+            monthlyServices={filteredServices.filter(s => s.isMonthlyPackage).length}
             month={selectedMonth}
             year={selectedYear}
             onMonthChange={handleMonthChange}
