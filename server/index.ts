@@ -78,6 +78,24 @@ try {
   // Directory might already exist
 }
 
+// Serve uploaded files estaticamente...
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
+
+//  Aqui adicionamos o healthcheck
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
+
+// Create uploads directory if it doesn't exist
+import { mkdir } from 'fs/promises';
+
+try {
+  await mkdir('uploads', { recursive: true });
+} catch (error) {
+  // Directory might already exist
+}
+
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 // Serve attached assets statically
