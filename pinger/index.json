@@ -1,0 +1,16 @@
+import fetch from "node-fetch";
+
+const URL = process.env.TARGET_URL || "https://SEU-DOMINIO-DO-APP.railway.app/api/health";
+const INTERVAL = Number(process.env.INTERVAL_MS || 1000 * 60 * 5); // 5 minutos
+
+async function ping() {
+  try {
+    const res = await fetch(URL, { method: "GET" });
+    console.log(`[${new Date().toISOString()}] ${URL} -> ${res.status}`);
+  } catch (e) {
+    console.error(`[${new Date().toISOString()}] ERRO: ${e.message}`);
+  }
+}
+
+ping();
+setInterval(ping, INTERVAL);

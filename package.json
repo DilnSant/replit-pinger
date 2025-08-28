@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "main": "server/index.ts",
+  "engines": {
+    "node": ">=18.18"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@neondatabase/serverless": "^1.0.1",
